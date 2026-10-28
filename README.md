@@ -238,7 +238,7 @@ The lab currently demonstrates Windows endpoint integration, security event coll
 
 Custom detection engineering, structured incident investigations, timeline reconstruction, and formal incident reporting remain planned development tasks.
 
-### Evidence & Initial Findings
+## Evidence & Initial Findings
 
 This section documents the initial evidence collected during the lab setup and Windows security event monitoring activities.
 
