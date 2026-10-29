@@ -240,70 +240,54 @@ Custom detection engineering, structured incident investigations, timeline recon
 
 ## Evidence & Initial Findings
 
-This section documents the initial evidence collected during the lab setup and Windows security event monitoring activities.
+This section presents evidence collected during initial lab testing and event review within the Wazuh SIEM and Windows 11 environment. The screenshots demonstrate endpoint registration, security event collection, threat hunting results, and initial examination of selected Windows security and PowerShell logs.
 
-#### 1. Wazuh Endpoint Integration
+### 1. Endpoint Registration & Status
 
-The Windows 11 endpoint was successfully registered with Wazuh and appeared as an active agent.
+* **Wazuh Agents Status:** Overview of the Wazuh dashboard showing the connected endpoint and its active monitoring status.
+![Wazuh Agents Status](agents-status.jpeg)
 
-The endpoint details confirmed the agent name, IP address, operating system, and connection status.
+* **Endpoint Details:** Details of the registered Windows 11 Pro endpoint (MiniSOC), including its agent ID, IP address, operating system, and connection status.
+![Endpoint Details](agent-details.jpeg)
 
-**Evidence:**
+---
 
-* Wazuh Endpoints Summary.
-* Wazuh Agent Details.
+### 2. Threat Hunting & Account Investigations
 
-#### 2. Failed Logon Event
+* **User & Group Activity:** Threat hunting results showing collected account-related and group membership events. These events provide a starting point for investigating user account creation and local group modifications.
+![User & Group Activity](threat-hunting-users.jpeg)
 
-Windows Event ID 4625 was observed in Wazuh.
+* **Logon Events Timeline:** Wazuh Threat Hunting view showing the timeline and records of collected logon-related events for initial authentication activity review.
+![Logon Events Timeline](threat-hunting-logons.jpeg)
 
-This event records a failed logon attempt and provides information that can support authentication-related investigation.
+---
 
-**Evidence:**
+### 3. Windows Security Event Log Analysis
 
-* Wazuh Threat Hunting results.
-* Event document details showing Event ID 4625 and associated event fields.
+* **Failed Logon Event (Event ID 4625):** Examination of a Windows Security event recording a failed logon attempt, which can support further analysis of authentication failures. A single event does not establish brute-force activity.
+![Failed Logon Event](event-4625.jpeg)
 
-#### 3. Service Installation Event
+* **Account Creation Event (Event ID 4720):** Review of a Windows security event recording the creation of a user account, providing evidence for examining account creation activity.
+![Account Creation Event](event-4720.jpeg)
 
-Windows Event ID 7045 was observed in Wazuh.
+* **Service Installation Event (Event ID 7045):** Review of a Service Control Manager event recording the installation of a Windows service. Further context is required to determine whether the service is legitimate or suspicious.
+![Service Installation Event](event-7045.jpeg)
 
-This event records the installation of a service. Further investigation is required to determine whether a specific service is expected, unusual, or potentially suspicious.
+---
 
-**Evidence:**
+### 4. PowerShell Telemetry & Script Logging
 
-* Wazuh event document details showing Event ID 7045 and Service Control Manager information.
+* **PowerShell Operational Log:** Windows Event Viewer evidence from the Microsoft-Windows-PowerShell/Operational channel, showing recorded PowerShell activity on the endpoint.
+![PowerShell Operational Log](powershell-operational.jpeg)
 
-#### 4. User Account Creation Event
+* **PowerShell Script Block Logging (Event ID 4104):** Detailed view of a PowerShell event associated with Script Block Logging, providing visibility into script content recorded by Windows.
+![PowerShell Script Block Logging](event-4104.jpeg)
 
-Windows Event ID 4720 was observed in Wazuh.
+---
 
-This event records the creation of a user account and can support investigations into account management activity.
+### Evidence Scope
 
-**Evidence:**
-
-* Wazuh Threat Hunting results.
-* Event document details showing Event ID 4720 and the account creation message.
-
-#### 5. PowerShell Script Block Logging
-
-PowerShell Event ID 4104 was observed in the local Windows Event Viewer under the PowerShell Operational log.
-
-The event details included information about the recorded script block, the associated user, the host, and the event timestamp.
-
-**Evidence:**
-
-* Windows PowerShell Operational event log.
-* Event Properties showing Event ID 4104 and recorded event details.
-
-### Investigation Notes
-
-The evidence collected so far confirms that the lab can receive and display selected Windows security events through Wazuh and the local Windows Event Viewer.
-
-The presence of an event does not, by itself, establish malicious activity. Additional context, event correlation, and investigation are required before determining whether activity is suspicious.
-
-The documented findings represent initial event examination rather than completed incident investigation reports.
-
+These screenshots document endpoint integration, security event collection, threat hunting views, and initial event review. They provide a foundation for further investigation but do not independently establish malicious activity. Custom Wazuh detection rules, event correlation, and structured incident investigation remain planned extensions of the project.
 
 
 ## Skills Demonstrated
